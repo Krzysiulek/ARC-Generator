@@ -1,1 +1,1 @@
-# ARC-Generator
+Abstraction and Reasoning Challenge - Generator
