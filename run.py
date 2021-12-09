@@ -1,0 +1,1 @@
+# todo obsługa poleceń + help
