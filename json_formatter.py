@@ -17,6 +17,7 @@ y = json.dumps(x)
 # the result is a JSON string:
 
 class JsonFormatter:
+    # iter tools, combinations
 
     def generate_problem_pair(self):
         cropSmallest = CropSmallestGenerator(width=4,

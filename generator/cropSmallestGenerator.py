@@ -22,13 +22,13 @@ class CropSmallestGenerator:
 
     def generate_input(self):
         size = (self.height, self.width)
-        image = np.zeros(size, dtype=int64)
+        image = np.zeros(size, dtype=np.chararray)
 
         for _ in range(self.bigger_amount):
+            # todo generowanie większych
             image = square_generator(image, self.smallest_position, self.smallest_size, self.smallest_color)
 
-
-        image = square_generator(image, self.smallest_position, self.smallest_size, self.smallest_color)
+        image = square_generator(image, self.smallest_position, self.smallest_size, "SOL_COL")
 
         return image.tolist()
 
