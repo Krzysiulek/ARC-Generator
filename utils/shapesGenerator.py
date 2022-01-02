@@ -13,3 +13,4 @@ def square_generator(image, square_position, square_size, square_color):
 
     return image
 
+
