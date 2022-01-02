@@ -36,7 +36,7 @@ class CropSmallestGenerator:
         return image
 
     def generate_output(self):
-        image = np.full((self.smallest_size, self.smallest_size), self.smallest_color)
+        image = np.full((self.smallest_size, self.smallest_size), "SOLUTION_COLOR", dtype=np.chararray)
         return image.tolist()
 
 

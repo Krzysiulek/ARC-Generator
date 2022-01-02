@@ -16,13 +16,13 @@ class JsonFormatter:
 
         mvc = MatrixValuesCombinations(matrix=input_array, values_to_insert=[1, 2, 3, 4, 5, 6, 7, 8])
         possible_values = mvc.get_possible_template_values()
-        input_combinations = mvc.create_matrixes_from_template(input_array, possible_values, max)
+        input_combinations = mvc.create_matrixes_from_template(input_array, output_array, possible_values, max)
 
         pairs = []
         for combination in input_combinations:
             pairs.append({
-                "input": combination,
-                "output": output_array
+                "input": combination[0],
+                "output": combination[1]
             })
 
         return pairs
