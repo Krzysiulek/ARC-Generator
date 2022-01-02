@@ -6,7 +6,7 @@ from json_formatter import JsonFormatter
 # generator do wyboru
 generator = CropSmallestVariationsGenerator()
 N = 5
-MAX_COMBINATIONS_OF_PROBLEM = 2  # ile wariacji koloru dla jednego problemu
+MAX_COMBINATIONS_OF_PROBLEM = 5  # ile wariacji koloru dla jednego problemu. Dla None generuje maksymalnie dużo kombinacji
 folder_to_save = 'data/crop_smallest/'
 
 different_csgs = []
