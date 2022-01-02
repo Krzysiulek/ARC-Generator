@@ -2,43 +2,54 @@ import io
 import json
 
 # a Python object (dict):
-from generator.cropSmallestGenerator import CropSmallestGenerator
+from combinations.combinations import MatrixValuesCombinations
+from generator.cropSmallestGenerator import CropSmallestGenerator, CropSmallestModel, CropSmallestVariationsGenerator
+import random
 
-x = {
-    "name": "John",
-    "age": 30,
-    "city": "New York"
-}
-
-# convert into JSON:
-y = json.dumps(x)
-
-
-# the result is a JSON string:
 
 class JsonFormatter:
     # iter tools, combinations
 
-    def generate_problem_pair(self):
-        cropSmallest = CropSmallestGenerator(width=4,
-                                             height=5,
-                                             smallest_position=(1, 2),
-                                             smallest_size=2)
-        input_array = cropSmallest.generate_input()
-        output_array = cropSmallest.generate_output()
+    def generate_problem_pairs(self, problem, max=None):
+        input_array = problem.generate_input()
+        output_array = problem.generate_output()
 
-        return {
-            "input": input_array,
-            "output": output_array
-        }
+        mvc = MatrixValuesCombinations(matrix=input_array, values_to_insert=[1, 2, 3, 4, 5, 6, 7, 8])
+        possible_values = mvc.get_possible_template_values()
+        input_combinations = mvc.create_matrixes_from_template(input_array, possible_values, max)
 
-    def generate_crop_smallest(self):
-        problem_pair = self.generate_problem_pair()
+        pairs = []
+        for combination in input_combinations:
+            pairs.append({
+                "input": combination,
+                "output": output_array
+            })
+
+        return pairs
+
+
+    def save_pairs_to_one_file(self, problems, file_name):
+        train_pairs = problems[1:]
+        test_pair = [problems[0]]
 
         info = {
-            "train": [
-                problem_pair
-            ],
+            "train": train_pairs,
+            "test": test_pair
+        }
+
+        y = json.dumps(info)
+        with io.open(file_name, 'w', encoding='utf-8') as f:
+            f.write(y)
+
+
+    def save_to_file(self, file_name='data.json', csg=None):
+        problem_pairs = self.generate_problem_pairs(csg, max=4)
+
+        # train_pairs =
+        # test_pair = pro
+
+        info = {
+            "train": problem_pairs,
             "test": [
                 {
                     "input": [
@@ -51,12 +62,8 @@ class JsonFormatter:
             ]
         }
 
-        print(info)
         y = json.dumps(info)
-        print(y)
-
-        with io.open('data.json', 'w', encoding='utf-8') as f:
+        with io.open(file_name, 'w', encoding='utf-8') as f:
             f.write(y)
 
 
-JsonFormatter().generate_crop_smallest()

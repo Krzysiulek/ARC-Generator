@@ -1,5 +1,6 @@
 import itertools
 from collections import Counter
+
 import numpy as np
 
 
@@ -16,6 +17,7 @@ class MatrixValuesCombinations:
         self.matrix_dict = self._create_dict_with_unified_values()
 
     def _parse_matrix(self, matrix):
+        matrix[matrix == 0] = "0"
         unique_values_in_matrix = list(np.unique(matrix))
         unique_values_in_matrix.remove("0")
         return unique_values_in_matrix
@@ -25,6 +27,23 @@ class MatrixValuesCombinations:
             key: self.matrix_values_to_insert for key in self.matrix_template_values
         }
 
+    def create_matrixes_from_template(self, image, combinations, max=None):
+        matrixes = []
+
+        for i, combination in enumerate(combinations):
+            if max is not None and i > max:
+                break
+
+            image_copy = np.copy(image)
+            image_copy[image_copy == "0"] = 0
+            for key in combination:
+                color_value = combination[key]
+                image_copy[image_copy == key] = color_value
+
+            matrixes.append(image_copy.tolist())
+
+        return matrixes
+
     def _get_max_occurences_values(self, counter_dict):
         return max(Counter(counter_dict.values()).values())
 
@@ -32,4 +51,3 @@ class MatrixValuesCombinations:
         keys, values = zip(*self.matrix_dict.items())
         permutations_dicts = [dict(zip(keys, v)) for v in itertools.product(*values)]
         return [d for d in permutations_dicts if self._get_max_occurences_values(d) < 2]
-
