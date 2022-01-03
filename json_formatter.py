@@ -14,19 +14,21 @@ class JsonFormatter:
         input_array = problem.generate_input()
         output_array = problem.generate_output()
 
-        mvc = MatrixValuesCombinations(matrix=input_array, values_to_insert=[1, 2, 3, 4, 5, 6, 7, 8])
-        possible_values = mvc.get_possible_template_values()
-        input_combinations = mvc.create_matrixes_from_template(input_array, output_array, possible_values, max)
+        final = []
+        for i_ar, o_ar in zip(input_array, output_array):
+            mvc = MatrixValuesCombinations(matrix=i_ar, values_to_insert=[1, 2, 3, 4, 5, 6, 7, 8])
+            possible_values = mvc.get_possible_template_values()
+            input_combinations = mvc.create_matrixes_from_template(i_ar, o_ar, possible_values, max)
 
-        pairs = []
-        for combination in input_combinations:
-            pairs.append({
-                "input": combination[0],
-                "output": combination[1]
-            })
+            pairs = []
+            for combination in input_combinations:
+                pairs.append({
+                    "input": combination[0],
+                    "output": combination[1]
+                })
 
-        return pairs
-
+            final.extend(pairs)
+        return final
 
     def save_pairs_to_one_file(self, problems, file_name):
         train_pairs = problems[1:]

@@ -1,22 +1,24 @@
 import random
 
 from generator.cropSmallestGenerator import CropSmallestVariationsGenerator
+from generator.gravityGenerator import GravityVariationsGenerator
 from json_formatter import JsonFormatter
 
 # generator do wyboru
 generator = CropSmallestVariationsGenerator()
 N = 5
 MAX_COMBINATIONS_OF_PROBLEM = 5  # ile wariacji koloru dla jednego problemu. Dla None generuje maksymalnie dużo kombinacji
-folder_to_save = 'data/crop_smallest/'
+folder_to_save = 'data/gravity/'
 
 different_csgs = []
-all_csg = generator.generate_all()
+# all_csg = generator.generate_all()
+all_csg = GravityVariationsGenerator().generate_all()
 formatter = JsonFormatter()
 
 # generuje problemy - templatki
 for i, val in enumerate(all_csg):
     pairs = formatter.generate_problem_pairs(val, max=MAX_COMBINATIONS_OF_PROBLEM)
-    different_csgs.extend(pairs)
+    different_csgs.extend(list(pairs))
 
 # tworzy indexy do wylosowania
 problems_len = len(different_csgs)
