@@ -1,3 +1,4 @@
+
 class GeneratorInterface:
 
     def genereate_all_inputs(self):
@@ -5,6 +6,6 @@ class GeneratorInterface:
         pass
 
 
-    def generate_output(self, input):
+    def generate_output(self):
         # must be overwrited
         pass

@@ -29,9 +29,9 @@ class ExampleMatrices:
 
 class TestMatrixValuesCombinations(TestCase):
     def setUp(self):
-        self.mvc1 = MatrixValuesCombinations(matrix=ExampleMatrices.M1, values_to_insert=[1,2])
-        self.mvc2 = MatrixValuesCombinations(matrix=ExampleMatrices.M2, values_to_insert=[1,2])
-        self.mvc3 = MatrixValuesCombinations(matrix=ExampleMatrices.M2, values_to_insert=[1,2,3])
+        self.mvc1 = MatrixValuesCombinations(matrix_input=ExampleMatrices.M1, values_to_insert=[1, 2])
+        self.mvc2 = MatrixValuesCombinations(matrix_input=ExampleMatrices.M2, values_to_insert=[1, 2])
+        self.mvc3 = MatrixValuesCombinations(matrix_input=ExampleMatrices.M2, values_to_insert=[1, 2, 3])
 
 class TestMatrixValuesCombinationsInit(TestMatrixValuesCombinations):
     def test_unique_values(self):

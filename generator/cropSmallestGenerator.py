@@ -1,7 +1,8 @@
 import numpy as np
 
-from combinations.combinationcolor import get_template_color
-from utils.shapesGenerator import square_generator
+from combinations.combinationcolor import get_template_color, SOLUTION_COLOR
+from generator.generatorInteface import GeneratorInterface
+from utils.shapesGenerator import square_generator, create_empty
 
 
 class CropSmallestModel:
@@ -10,7 +11,7 @@ class CropSmallestModel:
         self.size = size
 
 
-class CropSmallestGenerator:
+class CropSmallestGenerator(GeneratorInterface):
     def __init__(self,
                  width,
                  height,
@@ -26,18 +27,17 @@ class CropSmallestGenerator:
         self.big_squares = big_squares
 
     def generate_input(self):
-        size = (self.height, self.width)
-        image = np.zeros(size, dtype=np.chararray)
+        image = create_empty(self.height, self.width)
 
         for idx, square in enumerate(self.big_squares):
             image = square_generator(image, square.position, square.size, get_template_color(idx))
 
-        image = square_generator(image, self.smallest_position, self.smallest_size, "SOLUTION_COLOR")
+        image = square_generator(image, self.smallest_position, self.smallest_size, SOLUTION_COLOR)
         return image
 
     def generate_output(self):
-        image = np.full((self.smallest_size, self.smallest_size), "SOLUTION_COLOR", dtype=np.chararray)
-        return image.tolist()
+        image = np.full((self.smallest_size, self.smallest_size), SOLUTION_COLOR, dtype=np.chararray)
+        return image
 
 
 class CropSmallestVariationsGenerator:
