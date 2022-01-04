@@ -3,7 +3,7 @@ import numpy as np
 from itertools import product, chain
 
 
-# todo generator interface
+# Pozwoliłem sobie przenieść ten problem do pliku gravity2.py, żeby był bardziej przystosowany do tego mechanizmu, który aktualnie mamy
 from combinations.combinationcolor import get_template_color
 
 
