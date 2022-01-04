@@ -1,6 +1,8 @@
 import random
 import os
 
+from tqdm import tqdm
+
 from generator.cropSmallestGenerator import CropSmallestVariationsGenerator
 from generator.frameGenerator import FrameVariationsGenerator
 from json_formatter import JsonFormatter
@@ -26,7 +28,7 @@ def generate_and_save(generator,
     formatter = JsonFormatter()
 
     # generuje problemy - templatki
-    for i, val in enumerate(all_csg):
+    for i, val in tqdm(enumerate(all_csg), total=len(all_csg), desc="Generowanie templatek"):
         pairs = formatter.generate_problem_pairs(val, max=max_combinations_of_problem, values_to_insert=values_to_insert)
         different_csgs.extend(pairs)
 
@@ -36,9 +38,8 @@ def generate_and_save(generator,
     random_indexes_sub_list = [random_indexes[n:n + N] for n in range(0, len(random_indexes), N)]
 
     # zapisuje pliki po N losowych problemów
-
     max_i = 0
-    for i, val in enumerate(random_indexes_sub_list):
+    for i, val in tqdm(enumerate(random_indexes_sub_list), desc="Zapisywanie", total=len(random_indexes_sub_list)):
         random_problems_list = []
         max_i = i
 

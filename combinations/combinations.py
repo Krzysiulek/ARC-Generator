@@ -63,7 +63,6 @@ class MatrixValuesCombinations:
         return max(Counter(counter_dict.values()).values())
 
     def get_possible_template_values(self):
-        print(*self.matrix_dict.items())
         keys, values = zip(*self.matrix_dict.items())
         permutations_dicts = [dict(zip(keys, v)) for v in itertools.product(*values)]
         return [d for d in permutations_dicts if self._get_max_occurences_values(d) < 2]

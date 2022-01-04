@@ -1,7 +1,6 @@
 import io
 import json
 
-# a Python object (dict):
 from combinations.combinations import MatrixValuesCombinations
 
 
