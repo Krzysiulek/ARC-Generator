@@ -2,6 +2,7 @@
 
 
 # generator = CropSmallestVariationsGenerator()
+from generator.SnakeGenerator import SnakeVariationsGenerator
 from generator.cropSmallestGenerator import CropSmallestVariationsGenerator
 from generator.frameGenerator import FrameVariationsGenerator
 from generator.gravity2 import Gravity2VariationsGenerator
@@ -22,7 +23,7 @@ def run_crop_smallest():
 def run_frame():
     last_index = 0
 
-    for i in range(1, 9):
+    for i in range(1, 10):
         last_index += generate_and_save(generator=FrameVariationsGenerator(),
                           N=5,
                           max_combinations_of_problem=5,
@@ -41,7 +42,20 @@ def run_gravity():
                       short_problem_name='grv',
                       file_start_index=0)
 
+def run_snake():
+    last_index = 0
+
+    for i in range(1, 10):
+        last_index += generate_and_save(generator=SnakeVariationsGenerator(),
+                          N=5,
+                          max_combinations_of_problem=None,
+                          folder_to_save='data/snake',
+                          values_to_insert=[i],
+                          short_problem_name='snk',
+                          file_start_index=last_index)
+
 
 # run_frame()
 # run_crop_smallest()
-run_gravity()
+# run_gravity()
+run_snake()

@@ -18,8 +18,8 @@ def square_generator(image, square_position, square_size, square_color):
     return image
 
 
-def create_line(image, start_position, end_position, color):
-    # todo
+def create_dot(image, width_position, height_position, color):
+    image[width_position][height_position] = color
     return image
 
 
@@ -33,5 +33,4 @@ def create_frame(image, color):
         val[0] = color
         val[-1] = color
 
-    # todo
     return image
