@@ -50,10 +50,8 @@ class GravityGenerator:
 class GravityVariationsGenerator:
 
     def generate_all(self):
-        # heights = [4, 5, 6, 7, 8]
         heights = [4]
         widths = [4]
-        # widths = [4, 5, 6, 7, 8]
 
         return [
             GravityGenerator(width=w, height=h)

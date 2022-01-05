@@ -76,7 +76,7 @@ class CropSmallestVariationsGenerator:
     def generate_bigger(self, bigger_max_amount, bigger_size):
         bigger = []
 
-        for i in range(0, bigger_max_amount):
+        for _ in range(0, bigger_max_amount):
             csm = CropSmallestModel((0, 0), bigger_size)
             bigger.append(csm)
 
