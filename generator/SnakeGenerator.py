@@ -42,7 +42,7 @@ class SnakeVariationsGenerator:
     def generate_all(self):
         possible_values = []
 
-        heights = [3, 4, 5, 6, 7, 8]
+        heights = [3, 4, 5, 6, 7, 8, 9, 10]
         widths = [3, 4, 5, 6, 7, 8]
 
         for height in heights:

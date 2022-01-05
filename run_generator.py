@@ -46,6 +46,10 @@ def generate_and_save(generator,
         for problem_indexes in val:
             random_problems_list.append(different_csgs[problem_indexes])
 
+        if len(random_problems_list) < N:
+            print("Skipping")
+            continue
+
         os.makedirs(folder_to_save, exist_ok = True)
         file = f"{folder_to_save}/{i+file_start_index}_{short_problem_name}.json"
         formatter.save_pairs_to_one_file(random_problems_list, file_name=file)
