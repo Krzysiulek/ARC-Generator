@@ -59,5 +59,5 @@ class MatrixValuesCombinations:
         keys, values = zip(*self.matrix_dict.items())
         permutations_dicts = [dict(zip(keys, v)) for v in itertools.product(*values)]
         #TODO jak to sprytnie zrobic
-        return [d for d in permutations_dicts]
+        return permutations_dicts
         # return [d for d in permutations_dicts if self._get_max_occurences_values(d) < 2]
