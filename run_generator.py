@@ -22,14 +22,18 @@ def generate_and_save(generator,
                       folder_to_save,
                       values_to_insert,
                       short_problem_name='',
-                      file_start_index=0):
+                      file_start_index=0,
+                      solution_color_sticked_value=None):
     different_csgs = []
     all_csg = generator.generate_all()
     formatter = JsonFormatter()
 
     # generuje problemy - templatki
     for i, val in tqdm(enumerate(all_csg), total=len(all_csg), desc="Generowanie templatek"):
-        pairs = formatter.generate_problem_pairs(val, max=max_combinations_of_problem, values_to_insert=values_to_insert)
+        pairs = formatter.generate_problem_pairs(val,
+                                                 max=max_combinations_of_problem,
+                                                 values_to_insert=values_to_insert,
+                                                 solution_color_sticked_value=solution_color_sticked_value)
         different_csgs.extend(pairs)
 
     # tworzy indexy do wylosowania

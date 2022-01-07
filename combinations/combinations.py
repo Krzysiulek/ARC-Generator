@@ -16,7 +16,7 @@ class MatrixValuesCombinations:
         unique_merged = unique_inputs + unique_output
 
         # self.matrix_template_values = self._parse_matrix(unique_merged)
-        self.matrix_template_values = unique_merged
+        self.matrix_template_values = list(np.unique(unique_merged))
         self.matrix_values_to_insert = values_to_insert
         if len(self.matrix_values_to_insert) < len(self.matrix_template_values):
             raise MatrixValuesCombinationsError("Number of values to insert < template values")
@@ -35,10 +35,15 @@ class MatrixValuesCombinations:
             key: self.matrix_values_to_insert for key in self.matrix_template_values
         }
 
-    def create_matrixes_from_template(self, input_image, output_image, combinations, max=None):
+    def create_matrixes_from_template(self, input_image, output_image, combinations, max=None, solution_color_sticked_value=None):
         matrixes = []
 
         for i, combination in enumerate(combinations):
+            if solution_color_sticked_value is not None \
+                    and 'SOLUTION_COLOR' in combination \
+                    and combination['SOLUTION_COLOR'] != solution_color_sticked_value:
+                continue
+
             if max is not None and i > max:
                 break
 
