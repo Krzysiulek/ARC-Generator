@@ -19,7 +19,8 @@ class MatrixValuesCombinations:
     def _parse_matrix(self, matrix):
         matrix[matrix == 0] = "0"
         unique_values_in_matrix = list(np.unique(matrix))
-        unique_values_in_matrix.remove("0")
+        if "0" in unique_values_in_matrix:
+            unique_values_in_matrix.remove("0")
         return unique_values_in_matrix
 
     def _create_dict_with_unified_values(self):
@@ -57,4 +58,6 @@ class MatrixValuesCombinations:
     def get_possible_template_values(self):
         keys, values = zip(*self.matrix_dict.items())
         permutations_dicts = [dict(zip(keys, v)) for v in itertools.product(*values)]
-        return [d for d in permutations_dicts if self._get_max_occurences_values(d) < 2]
+        #TODO jak to sprytnie zrobic
+        return [d for d in permutations_dicts]
+        # return [d for d in permutations_dicts if self._get_max_occurences_values(d) < 2]
