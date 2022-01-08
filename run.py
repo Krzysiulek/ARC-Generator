@@ -89,7 +89,7 @@ def run_labyrinth():
                           folder_to_save='data/labyrinth',
                           values_to_insert=[i],
                           short_problem_name='lab',
-                          file_start_index=i,
+                          file_start_index=last_index,
                           solution_color_sticked_value=None)
 
 # run_frame()
