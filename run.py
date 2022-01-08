@@ -6,6 +6,7 @@ from generator.SnakeGenerator import SnakeVariationsGenerator
 from generator.cropSmallestGenerator import CropSmallestVariationsGenerator
 from generator.frameGenerator import FrameVariationsGenerator
 from generator.gravity2 import Gravity2VariationsGenerator
+from generator.labyrinthGenerator import LabyrinthVariationsGenerator
 from generator.repetitionGenerator import RepetitionVariationsGenerator
 from generator.rescaleGenerator import RescaleVariationsGenerator
 from generator.resize2 import ResizeVariationsGenerator
@@ -78,11 +79,23 @@ def run_rescale():
                       file_start_index=0,
                       solution_color_sticked_value=0)
 
+def run_labyrinth():
+    last_index = 0
 
+    for i in range(1, 10):
+        last_index += generate_and_save(generator=LabyrinthVariationsGenerator(),
+                          N=5,
+                          max_combinations_of_problem=None,
+                          folder_to_save='data/labyrinth',
+                          values_to_insert=[i],
+                          short_problem_name='lab',
+                          file_start_index=i,
+                          solution_color_sticked_value=None)
 
 # run_frame()
 # run_crop_smallest()
 # run_gravity()
 # run_snake()
 # run_repetition()
-run_rescale()
+# run_rescale()
+run_labyrinth()

@@ -79,13 +79,3 @@ class ResizeVariationsGenerator:
     def create_variation_points(self, height, width):
         l = list(itertools.combinations_with_replacement([0, 1, 2, 4, 5], r=height * width))
         return l
-
-    def create_points(self, list_to_search, value_to_find):
-        points = []
-
-        for x, sublist in enumerate(list_to_search):
-            for y, val in enumerate(sublist):
-                if val == value_to_find:
-                    points.append((x, y))
-
-        return points

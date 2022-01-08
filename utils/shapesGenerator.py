@@ -18,6 +18,19 @@ def square_generator(image, square_position, square_size, square_color):
     return image
 
 
+def create_line(image, start_position, end_position, color):
+    tmp_start_x = min(start_position[0], end_position[0])
+    tmp_end_x = max(start_position[0], end_position[0])
+    for x in range(tmp_start_x, tmp_end_x):
+
+        tmp_start_y = min(start_position[1], end_position[1])
+        tmp_end_y = max(start_position[1], end_position[1])
+        for y in range(tmp_start_y, tmp_end_y):
+            image[x][y] = color
+
+    return image
+
+
 def create_dot(image, width_position, height_position, color):
     image[width_position][height_position] = color
     return image
