@@ -57,7 +57,6 @@ class CropSmallestVariationsGenerator:
                         for small_y_position in range(0, height - small_size):
                             for bigger_amount in range(0, max_bigger_amount):
                                 for bigger_size in range(small_size + 1, min(height, width)):
-                                    print('H: {}, W: {}, SS: {}, SXP: {}, SYP: {}'.format(height, width, small_size, small_x_position, small_y_position))
 
                                     bigger = self.generate_bigger(bigger_amount, bigger_size)
                                     csg = CropSmallestGenerator(width=width,

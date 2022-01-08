@@ -35,8 +35,6 @@ class LabyrinthGenerator(GeneratorInterface):
                 point = go_up(image, point)
 
             it += 1
-            print(image)
-            print(point)
 
             if it == 4:
                 it = 0
@@ -44,8 +42,6 @@ class LabyrinthGenerator(GeneratorInterface):
             it_to_stop += 1
             if it_to_stop == self.width - 2:
                 should_stop = True
-
-            print(not should_stop)
 
         image[image == 1] = SOLUTION_COLOR
         return image
@@ -130,7 +126,6 @@ def go_up(image, starting_point):
         if y - 2 == len(image):
             continue
 
-        print(f"y: {y}")
         point = image[y - 2][end_x]
         image[y][end_x] = 0
 
