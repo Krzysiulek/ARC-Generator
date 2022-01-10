@@ -1,9 +1,8 @@
-import random
 import os
+import random
 
 from tqdm import tqdm
 
-from generator.cropSmallestGenerator import CropSmallestVariationsGenerator
 from generator.frameGenerator import FrameVariationsGenerator
 from json_formatter import JsonFormatter
 
@@ -51,7 +50,7 @@ def generate_and_save(generator,
             random_problems_list.append(different_csgs[problem_indexes])
 
         if len(random_problems_list) < N:
-            print("Skipping")
+            print(f"Skipping {len(random_problems_list)}")
             continue
 
         os.makedirs(folder_to_save, exist_ok = True)
