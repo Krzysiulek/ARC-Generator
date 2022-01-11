@@ -1,3 +1,5 @@
+import random
+
 from combinations.combinationcolor import SOLUTION_COLOR, get_template_color
 from generator.generatorInteface import GeneratorInterface
 from utils.shapesGenerator import create_empty, create_dot
@@ -20,16 +22,37 @@ class FramedDotsGenerator(GeneratorInterface):
         image = self.create_base_img()
 
         for dot in self.dots_positions:
-            image = create_dot(image, dot[0] - 1, dot[1], get_template_color(1))
-            image = create_dot(image, dot[0] + 1, dot[1], get_template_color(1))
-            image = create_dot(image, dot[0] + 1, dot[1] + 1, get_template_color(1))
-            image = create_dot(image, dot[0] - 1, dot[1] + 1, get_template_color(1))
-            image = create_dot(image, dot[0], dot[1] + 1, get_template_color(1))
-            image = create_dot(image, dot[0], dot[1] - 1, get_template_color(1))
-            image = create_dot(image, dot[0] + 1, dot[1] - 1, get_template_color(1))
-            image = create_dot(image, dot[0] - 1, dot[1] - 1, get_template_color(1))
+            if self.is_point_not_over_image((dot[0] - 1, dot[1])):
+                image = create_dot(image, dot[0] - 1, dot[1], get_template_color(1))
+
+            if self.is_point_not_over_image((dot[0] + 1, dot[1])):
+                image = create_dot(image, dot[0] + 1, dot[1], get_template_color(1))
+
+            if self.is_point_not_over_image((dot[0] + 1, dot[1] + 1)):
+                image = create_dot(image, dot[0] + 1, dot[1] + 1, get_template_color(1))
+
+            if self.is_point_not_over_image((dot[0] - 1, dot[1] + 1)):
+                image = create_dot(image, dot[0] - 1, dot[1] + 1, get_template_color(1))
+
+            if self.is_point_not_over_image((dot[0], dot[1] + 1)):
+                image = create_dot(image, dot[0], dot[1] + 1, get_template_color(1))
+
+            if self.is_point_not_over_image((dot[0], dot[1] - 1)):
+                image = create_dot(image, dot[0], dot[1] - 1, get_template_color(1))
+
+            if self.is_point_not_over_image((dot[0] + 1, dot[1] - 1)):
+                image = create_dot(image, dot[0] + 1, dot[1] - 1, get_template_color(1))
+
+            if self.is_point_not_over_image((dot[0] - 1, dot[1] - 1)):
+                image = create_dot(image, dot[0] - 1, dot[1] - 1, get_template_color(1))
 
         return image
+
+    def is_point_not_over_image(self, dot):
+        if dot[0] >= 0 and dot[0] < self.height and dot[1] >= 0 and dot[1] < self.width:
+            return True
+        return False
+
 
     def create_base_img(self):
         image = create_empty(self.height, self.width)
@@ -48,54 +71,24 @@ class FramedDotsVariationsGenerator:
 
         for height in range(6, 12):
             for width in range(6, 12):
-
-                # if width != height:
-                #     continue
-
-                max_dots_number = 5
-                dots = self.get_dots_positions_combinations(height - 3, width - 3, max_dots_number)
-
-                for dots_combinations in dots:
-                    generator = FramedDotsGenerator(width=width,
-                                                   height=height,
-                                                    dots_positions=dots_combinations)
-                    possible_values.append(generator)
+                for dot_amount in range(1, 5):
+                    for _ in range(10):
+                        dots = self.get_dots_positions_combinations(height, width, dot_amount)
+                        generator = FramedDotsGenerator(width=width,
+                                                        height=height,
+                                                        dots_positions=dots)
+                        possible_values.append(generator)
 
         return possible_values
 
-
     def get_dots_positions_combinations(self, height, width, dots_number):
-        all_dots = []
         dots_to_return = []
 
-        for h in range(1, height):
-            for w in range(1, width):
-                all_dots.append((h, w))
+        while (len(dots_to_return) < dots_number):
+            dot = (random.randrange(0, height), random.randrange(0, width))
 
-        for dot_idx in range(0, len(all_dots) - dots_number - 1):
-            tmp_dots = []
-
-            for i in range(1, dots_number):
-
-
-                iterat = 0
-                while (iterat < len(all_dots) - iterat):
-                    iterat+=1
-
-                    if len(tmp_dots) >= i:
-                        break
-
-                    if (dot_idx + iterat) >= len(all_dots):
-                        break
-
-                    dot = all_dots[dot_idx + iterat]
-
-                    if (self.is_such_dot_possible(dot[0], dot[1], tmp_dots, height, width)):
-                        tmp_dots.append((dot[0], dot[1]))
-
-
-                if len(tmp_dots) == i - 1:
-                    dots_to_return.append(tmp_dots)
+            if self.is_such_dot_possible(dot[0], dot[1], dots_to_return, height, width):
+                dots_to_return.append(dot)
 
         return dots_to_return
 
@@ -111,15 +104,11 @@ class FramedDotsVariationsGenerator:
 
             space_between = 2
 
-            if dot[0] - space_between <= height_point <= dot[0] + space_between:
+            if dot[0] - space_between <= height_point <= dot[0] + space_between and dot[
+                1] - space_between <= width_point <= dot[1] + space_between:
                 return False
 
-            if dot[1] - space_between <= width_point <= dot[1] + space_between:
-                return False
+            # if dot[1] - space_between <= width_point <= dot[1] + space_between:
+            #     return False
 
         return True
-
-
-
-
-
