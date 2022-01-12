@@ -52,11 +52,8 @@ class LabyrinthVariationsGenerator:
     def generate_all(self):
         possible_values = []
 
-        heights = [6, 7, 8, 9, 10, 11, 12]
-        widths = [6, 7, 8, 9, 10, 11, 12]
-
-        for height in heights:
-            for width in widths:
+        for height in range(6, 33):
+            for width in range(6, 33):
                 if width != height:
                     continue
 

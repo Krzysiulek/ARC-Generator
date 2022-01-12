@@ -1,10 +1,10 @@
 from itertools import product, chain
 
 import numpy as np
+from tqdm import tqdm
 
 from combinations.combinationcolor import get_template_color
 from generator.generatorInteface import GeneratorInterface
-from tqdm import tqdm
 
 
 class Gravity2Generator(GeneratorInterface):
@@ -48,6 +48,8 @@ class Gravity2VariationsGenerator:
 
         heights = [4]
         widths = [4]
+        
+        ite = 0
 
         for height in tqdm(heights, desc='height', position=0):
             for width in tqdm(widths, desc='width', position=1, leave=False):
