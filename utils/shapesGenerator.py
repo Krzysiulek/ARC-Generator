@@ -17,6 +17,22 @@ def square_generator(image, square_position, square_size, square_color):
 
     return image
 
+def create_rectangle(image, start_position, end_position, color):
+    for x in range(start_position[1], end_position[1] + 1):
+        for y in range(start_position[0], end_position[0] + 1):
+            image[y][x] = color
+
+    return image
+
+
+def create_frame_rectangle(image, starting_point, ending_point, color):
+    image = create_rectangle(image, starting_point, ending_point, color)
+    image = create_rectangle(image,
+                             (starting_point[0] + 1, starting_point[1] + 1),
+                             (ending_point[0] - 1, ending_point[1] - 1),
+                             0)
+    return image
+
 
 def create_line(image, start_position, end_position, color):
     tmp_start_x = min(start_position[0], end_position[0])

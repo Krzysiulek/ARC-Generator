@@ -3,6 +3,7 @@
 
 # generator = CropSmallestVariationsGenerator()
 from generator.FramedDotsGenerator import FramedDotsVariationsGenerator
+from generator.InsideOutsideSqareDotsGenerator import InsideOutsideSquareDotsVariationsGenerator
 from generator.SnakeGenerator import SnakeVariationsGenerator
 from generator.TwistedCrossGenerator import TwistedCrossVariationsGenerator
 from generator.cropSmallestGenerator import CropSmallestVariationsGenerator
@@ -64,7 +65,7 @@ def run_repetition():
     generate_and_save(generator=RepetitionVariationsGenerator(),
                       N=5,
                       max_combinations_of_problem=None,
-                      folder_to_save='data/inputs/repetition',
+                      folder_to_save='data/repetition',
                       values_to_insert=[1,2],
                       short_problem_name='rep',
                       file_start_index=0,
@@ -117,6 +118,16 @@ def run_twisted_cross():
                                         short_problem_name='tws-crs',
                                         file_start_index=0,
                                         solution_color_sticked_value=None)
+
+def run_inside_outside_dots(N=5):
+    generate_and_save(generator=InsideOutsideSquareDotsVariationsGenerator(),
+                      N=N,
+                      max_combinations_of_problem=1,
+                      folder_to_save=f'data/inputs/inside-outside/{N}',
+                      values_to_insert=[1, 2, 3, 4, 5, 6, 7, 8, 9],
+                      short_problem_name='in-out',
+                      file_start_index=0,
+                      solution_color_sticked_value=None)
 
 # run_frame() # done
 # run_crop_smallest() # tego nie robimy, bo input.size != output.size
