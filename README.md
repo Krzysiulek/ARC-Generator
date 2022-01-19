@@ -45,3 +45,8 @@ There are example files to visualise:
 There is a visualization of mentioned above problems:
 
 ![Gravity, Crop Smallest, Frame](readme_files/visualised.png)
+
+
+## CNN to check results 
+There is also [CNN Jupiter Notebook Solution](solution/ARC_CA_CNN.ipynb) - solution based 
+on CNN architecture used during tests.
